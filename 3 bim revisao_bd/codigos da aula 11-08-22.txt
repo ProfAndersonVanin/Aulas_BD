@@ -1,0 +1,66 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 36
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use revisao;
+Database changed
+MariaDB [revisao]> show tables;
++-------------------+
+| Tables_in_revisao |
++-------------------+
+| clientes          |
+| compras           |
+| produtos          |
++-------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [revisao]> describe clientes;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_cliente   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_cliente | varchar(255) | YES  |     | NULL    |                |
+| email        | varchar(255) | YES  |     | NULL    |                |
+| estado       | varchar(2)   | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.017 sec)
+
+MariaDB [revisao]> INSERT INTO CLIENTES(nome_cliente,email,estado)
+    -> VALUES('ETEC MCM','ETEC@EMAIL.COM','SP');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [revisao]> SELECT * FROM CLIENTES;
++------------+--------------+----------------+--------+
+| id_cliente | nome_cliente | email          | estado |
++------------+--------------+----------------+--------+
+|          1 | ETEC MCM     | ETEC@EMAIL.COM | SP     |
++------------+--------------+----------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [revisao]> INSERT INTO CLIENTES(nome_cliente,email,estado)
+    -> VALUES('ETEC MAUA','ETECMAUA@EMAIL.COM','SP'),
+    -> ('ETEC LAURO GOMES','ETECLG@EMAIL.COM','RJ');
+Query OK, 2 rows affected (0.011 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> SELECT * FROM CLIENTES;
++------------+------------------+--------------------+--------+
+| id_cliente | nome_cliente     | email              | estado |
++------------+------------------+--------------------+--------+
+|          1 | ETEC MCM         | ETEC@EMAIL.COM     | SP     |
+|          2 | ETEC MAUA        | ETECMAUA@EMAIL.COM | SP     |
+|          3 | ETEC LAURO GOMES | ETECLG@EMAIL.COM   | RJ     |
++------------+------------------+--------------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [revisao]>
