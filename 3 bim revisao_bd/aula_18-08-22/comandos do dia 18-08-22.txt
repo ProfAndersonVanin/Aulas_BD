@@ -1,0 +1,176 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 38
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use revisao;
+Database changed
+MariaDB [revisao]> describe produtos;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| codigo       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_produto | varchar(255) | YES  |     | NULL    |                |
+| cor          | varchar(255) | YES  |     | NULL    |                |
+| preco        | decimal(5,2) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.018 sec)
+
+MariaDB [revisao]> INSERT INTO produtos (nome_produto,cor,preco)
+    -> VALUES ('CADERNO','AZUL',15.75),
+    -> ('LAPIS','AMARELO',0.99),
+    -> ('BORRACHA','BRANCA',1.50);
+Query OK, 3 rows affected (0.003 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> SELECT * FROM PRODUTOS;
++--------+--------------+---------+-------+
+| codigo | nome_produto | cor     | preco |
++--------+--------------+---------+-------+
+|      1 | CADERNO      | AZUL    | 15.75 |
+|      2 | LAPIS        | AMARELO |  0.99 |
+|      3 | BORRACHA     | BRANCA  |  1.50 |
++--------+--------------+---------+-------+
+3 rows in set (0.000 sec)
+
+
+MariaDB [revisao]> INSERT INTO produtos (nome_produto,cor,preco)
+    -> VALUES ('REGUA','TRANSPARENTE',5.32),
+    -> ('PASTA DE FOLHAS','ROSA',8.50),
+    -> ('PEN DRIVE','PRETO',34.20),
+    -> ('FICHARIO','AZUL',15.00),
+    -> ('APONTADOR','AMARELO',2.00);
+Query OK, 5 rows affected (0.011 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> SELECT * FROM PRODUTOS;
++--------+-----------------+--------------+-------+
+| codigo | nome_produto    | cor          | preco |
++--------+-----------------+--------------+-------+
+|      1 | CADERNO         | AZUL         | 15.75 |
+|      2 | LAPIS           | AMARELO      |  0.99 |
+|      3 | BORRACHA        | BRANCA       |  1.50 |
+|      4 | REGUA           | TRANSPARENTE |  5.32 |
+|      5 | PASTA DE FOLHAS | ROSA         |  8.50 |
+|      6 | PEN DRIVE       | PRETO        | 34.20 |
+|      7 | FICHARIO        | AZUL         | 15.00 |
+|      8 | APONTADOR       | AMARELO      |  2.00 |
++--------+-----------------+--------------+-------+
+8 rows in set (0.000 sec)
+
+MariaDB [revisao]> DESCRIBE COMPRAS;
++-------------+---------+------+-----+---------+----------------+
+| Field       | Type    | Null | Key | Default | Extra          |
++-------------+---------+------+-----+---------+----------------+
+| nf          | int(11) | NO   | PRI | NULL    | auto_increment |
+| data_compra | date    | YES  |     | NULL    |                |
+| id_cliente  | int(11) | YES  | MUL | NULL    |                |
+| codigo      | int(11) | YES  | MUL | NULL    |                |
++-------------+---------+------+-----+---------+----------------+
+4 rows in set (0.018 sec)
+
+MariaDB [revisao]> SELECT * FROM CLIENTES;
++------------+------------------+--------------------+--------+
+| id_cliente | nome_cliente     | email              | estado |
++------------+------------------+--------------------+--------+
+|          1 | ETEC MCM         | ETEC@EMAIL.COM     | SP     |
+|          2 | ETEC MAUA        | ETECMAUA@EMAIL.COM | SP     |
+|          3 | ETEC LAURO GOMES | ETECLG@EMAIL.COM   | RJ     |
++------------+------------------+--------------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [revisao]> INSERT INTO COMPRAS (data_compra,id_cliente,codigo)
+    -> VALUES ('2022-08-18',2,1),
+    -> ('2022-08-18',2,2),
+    -> ('2022-08-18',1,1),
+    -> ('2022-08-18',1,4),
+    -> ('2022-08-18',3,4);
+Query OK, 5 rows affected (0.011 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> SELECT * FROM compras;
++----+-------------+------------+--------+
+| nf | data_compra | id_cliente | codigo |
++----+-------------+------------+--------+
+|  1 | 2022-08-18  |          2 |      1 |
+|  2 | 2022-08-18  |          2 |      2 |
+|  3 | 2022-08-18  |          1 |      1 |
+|  4 | 2022-08-18  |          1 |      4 |
+|  5 | 2022-08-18  |          3 |      4 |
++----+-------------+------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [revisao]> select * from produtos;
++--------+-----------------+--------------+-------+
+| codigo | nome_produto    | cor          | preco |
++--------+-----------------+--------------+-------+
+|      1 | CADERNO         | AZUL         | 15.75 |
+|      2 | LAPIS           | AMARELO      |  0.99 |
+|      3 | BORRACHA        | BRANCA       |  1.50 |
+|      4 | REGUA           | TRANSPARENTE |  5.32 |
+|      5 | PASTA DE FOLHAS | ROSA         |  8.50 |
+|      6 | PEN DRIVE       | PRETO        | 34.20 |
+|      7 | FICHARIO        | AZUL         | 15.00 |
+|      8 | APONTADOR       | AMARELO      |  2.00 |
++--------+-----------------+--------------+-------+
+8 rows in set (0.000 sec)
+
+MariaDB [revisao]> UPDATE PRODUTOS
+    -> SET NOME_PRODUTO = 'LAPIS COLORIDO'
+    -> WHERE CODIGO = 2;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [revisao]> select * from produtos;
++--------+-----------------+--------------+-------+
+| codigo | nome_produto    | cor          | preco |
++--------+-----------------+--------------+-------+
+|      1 | CADERNO         | AZUL         | 15.75 |
+|      2 | LAPIS COLORIDO  | AMARELO      |  0.99 |
+|      3 | BORRACHA        | BRANCA       |  1.50 |
+|      4 | REGUA           | TRANSPARENTE |  5.32 |
+|      5 | PASTA DE FOLHAS | ROSA         |  8.50 |
+|      6 | PEN DRIVE       | PRETO        | 34.20 |
+|      7 | FICHARIO        | AZUL         | 15.00 |
+|      8 | APONTADOR       | AMARELO      |  2.00 |
++--------+-----------------+--------------+-------+
+8 rows in set (0.000 sec)
+
+MariaDB [revisao]> DELETE FROM PRODUTOS WHERE CODIGO=8;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [revisao]> select * from produtos;
++--------+-----------------+--------------+-------+
+| codigo | nome_produto    | cor          | preco |
++--------+-----------------+--------------+-------+
+|      1 | CADERNO         | AZUL         | 15.75 |
+|      2 | LAPIS COLORIDO  | AMARELO      |  0.99 |
+|      3 | BORRACHA        | BRANCA       |  1.50 |
+|      4 | REGUA           | TRANSPARENTE |  5.32 |
+|      5 | PASTA DE FOLHAS | ROSA         |  8.50 |
+|      6 | PEN DRIVE       | PRETO        | 34.20 |
+|      7 | FICHARIO        | AZUL         | 15.00 |
++--------+-----------------+--------------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [revisao]> SELECT CLIENTES.NOME_CLIENTE,PRODUTOS.NOME_PRODUTO
+    -> FROM CLIENTES,COMPRAS,PRODUTOS
+    -> WHERE CLIENTES.ID_CLIENTE = COMPRAS.ID_CLIENTE AND
+    -> COMPRAS.CODIGO = PRODUTOS.CODIGO AND
+    -> CLIENTES.ID_CLIENTE = 2;
++--------------+----------------+
+| NOME_CLIENTE | NOME_PRODUTO   |
++--------------+----------------+
+| ETEC MAUA    | CADERNO        |
+| ETEC MAUA    | LAPIS COLORIDO |
++--------------+----------------+
+2 rows in set (0.001 sec)
