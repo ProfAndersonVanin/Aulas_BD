@@ -1,0 +1,336 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>CD C:\XAMPP\MYSQL\BIN
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 131
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cadastro           |
+| exemplo            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use exemplo;
+Database changed
+MariaDB [exemplo]> show tables;
++-------------------+
+| Tables_in_exemplo |
++-------------------+
+| departamento      |
+| funcionarios      |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]> describe departamento;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| codigo     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_depto | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.016 sec)
+
+MariaDB [exemplo]> INSERT INTO departamento (codigo,nome_depto)
+    -> VALUES (10,'COMPRAS');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+------------+
+| codigo | nome_depto |
++--------+------------+
+|     10 | COMPRAS    |
++--------+------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> INSERT INTO departamento (codigo,nome_depto)
+    -> VALUES (10,'VENDAS');
+ERROR 1062 (23000): Duplicate entry '10' for key 'PRIMARY'
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+------------+
+| codigo | nome_depto |
++--------+------------+
+|     10 | COMPRAS    |
++--------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> INSERT INTO departamento (nome_depto)
+    -> VALUES ('VENDAS');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+------------+
+| codigo | nome_depto |
++--------+------------+
+|     10 | COMPRAS    |
+|     11 | VENDAS     |
++--------+------------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]> INSERT INTO departamento (nome_depto)
+    -> VALUES ('ECOMMERCE'),('SAC'),('DIRETORIA');
+Query OK, 3 rows affected (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+------------+
+| codigo | nome_depto |
++--------+------------+
+|     10 | COMPRAS    |
+|     11 | VENDAS     |
+|     12 | ECOMMERCE  |
+|     13 | SAC        |
+|     14 | DIRETORIA  |
++--------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [exemplo]> UPDATE DEPARTAMENTO
+    -> SET NOME_DEPTO = 'ATENDIMENTO AO CONSUMIDOR'
+    -> WHERE CODIGO = 13;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+---------------------------+
+| codigo | nome_depto                |
++--------+---------------------------+
+|     10 | COMPRAS                   |
+|     11 | VENDAS                    |
+|     12 | ECOMMERCE                 |
+|     13 | ATENDIMENTO AO CONSUMIDOR |
+|     14 | DIRETORIA                 |
++--------+---------------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [exemplo]> DELETE FROM DEPARTAMENTO
+    -> WHERE CODIGO = 10;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [exemplo]> SELECT * FROM DEPARTAMENTO;
++--------+---------------------------+
+| codigo | nome_depto                |
++--------+---------------------------+
+|     11 | VENDAS                    |
+|     12 | ECOMMERCE                 |
+|     13 | ATENDIMENTO AO CONSUMIDOR |
+|     14 | DIRETORIA                 |
++--------+---------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> ORDER BY NOME DESC;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE SEXO = 'M';
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE SEXO = 'M' AND CODIGO = 11;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE SEXO = 'M' OR CODIGO = 11;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'A%';
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE '%S';
+Empty set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
+|        4 | Manuela  | manuela@email.com  | (11)99999-8888 | F    | 11.222.333-X |     12 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'Ma%';
++----------+---------+-------------------+----------------+------+--------------+--------+
+| registro | nome    | email             | telefone       | sexo | rg           | codigo |
++----------+---------+-------------------+----------------+------+--------------+--------+
+|        2 | Maria   | maria@email.com   | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        4 | Manuela | manuela@email.com | (11)99999-8888 | F    | 11.222.333-X |     12 |
++----------+---------+-------------------+----------------+------+--------------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'Man%';
++----------+---------+-------------------+----------------+------+--------------+--------+
+| registro | nome    | email             | telefone       | sexo | rg           | codigo |
++----------+---------+-------------------+----------------+------+--------------+--------+
+|        4 | Manuela | manuela@email.com | (11)99999-8888 | F    | 11.222.333-X |     12 |
++----------+---------+-------------------+----------------+------+--------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'M%s';
+Empty set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
+|        4 | Manuela  | manuela@email.com  | (11)99999-8888 | F    | 11.222.333-X |     12 |
+|        5 | Matheus  | matheus@email.com  | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'M%s';
++----------+---------+-------------------+----------------+------+--------------+--------+
+| registro | nome    | email             | telefone       | sexo | rg           | codigo |
++----------+---------+-------------------+----------------+------+--------------+--------+
+|        5 | Matheus | matheus@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+---------+-------------------+----------------+------+--------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'M_s';
+Empty set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE 'M_____s';
++----------+---------+-------------------+----------------+------+--------------+--------+
+| registro | nome    | email             | telefone       | sexo | rg           | codigo |
++----------+---------+-------------------+----------------+------+--------------+--------+
+|        5 | Matheus | matheus@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+---------+-------------------+----------------+------+--------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS
+    -> WHERE NOME LIKE '____';
++----------+------+----------------+----------------+------+--------------+--------+
+| registro | nome | email          | telefone       | sexo | rg           | codigo |
++----------+------+----------------+----------------+------+--------------+--------+
+|        3 | João | joao@email.com | (11)99999-8888 | M    | 11.222.333-X |     14 |
++----------+------+----------------+----------------+------+--------------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> SELECT * FROM FUNCIONARIOS;
++----------+----------+--------------------+----------------+------+--------------+--------+
+| registro | nome     | email              | telefone       | sexo | rg           | codigo |
++----------+----------+--------------------+----------------+------+--------------+--------+
+|        1 | Anderson | anderson@email.com | (11)99999-8888 | M    | 11.222.333-X |     11 |
+|        2 | Maria    | maria@email.com    | (12)98765-4532 | F    | 33.567.894-1 |     11 |
+|        3 | João     | joao@email.com     | (11)99999-8888 | M    | 11.222.333-X |     14 |
+|        4 | Manuela  | manuela@email.com  | (11)99999-8888 | F    | 11.222.333-X |     12 |
+|        5 | Matheus  | matheus@email.com  | (11)99999-8888 | M    | 11.222.333-X |     11 |
++----------+----------+--------------------+----------------+------+--------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT COUNT(NOME) FROM FUNCIONARIOS;
++-------------+
+| COUNT(NOME) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT COUNT(NOME) AS QTDE_REGISTROS FROM FUNCIONARIOS;
++----------------+
+| QTDE_REGISTROS |
++----------------+
+|              5 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT COUNT(NOME) AS QTDE_HOMENS FROM FUNCIONARIOS;
++-------------+
+| QTDE_HOMENS |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT COUNT(NOME) AS QTDE_HOMENS FROM FUNCIONARIOS
+    -> WHERE SEXO = 'M';
++-------------+
+| QTDE_HOMENS |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> SELECT COUNT(NOME) AS QTDE_MULHERES FROM FUNCIONARIOS
+    -> WHERE SEXO = 'F';
++---------------+
+| QTDE_MULHERES |
++---------------+
+|             2 |
++---------------+
+1 row in set (0.001 sec)
