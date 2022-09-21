@@ -1,0 +1,458 @@
+Q2
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| classicmodels      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+
+Q4
+
+MariaDB [(none)]> USE CLASSICMODELS;
+Database changed
+MariaDB [CLASSICMODELS]> SHOW TABLES;
++-------------------------+
+| Tables_in_classicmodels |
++-------------------------+
+| customers               |
+| employees               |
+| offices                 |
+| orderdetails            |
+| orders                  |
+| payments                |
+| productlines            |
+| products                |
++-------------------------+
+8 rows in set (0.001 sec)
+
+
+Q5
+
+MariaDB [CLASSICMODELS]> DESCRIBE customers;
++------------------------+-------------+------+-----+---------+-------+
+| Field                  | Type        | Null | Key | Default | Extra |
++------------------------+-------------+------+-----+---------+-------+
+| customerNumber         | int(11)     | NO   | PRI | NULL    |       |
+| customerName           | varchar(50) | NO   |     | NULL    |       |
+| contactLastName        | varchar(50) | NO   |     | NULL    |       |
+| contactFirstName       | varchar(50) | NO   |     | NULL    |       |
+| phone                  | varchar(50) | NO   |     | NULL    |       |
+| addressLine1           | varchar(50) | NO   |     | NULL    |       |
+| addressLine2           | varchar(50) | YES  |     | NULL    |       |
+| city                   | varchar(50) | NO   |     | NULL    |       |
+| state                  | varchar(50) | YES  |     | NULL    |       |
+| postalCode             | varchar(15) | YES  |     | NULL    |       |
+| country                | varchar(50) | NO   |     | NULL    |       |
+| salesRepEmployeeNumber | int(11)     | YES  | MUL | NULL    |       |
+| creditLimit            | double      | YES  |     | NULL    |       |
++------------------------+-------------+------+-----+---------+-------+
+13 rows in set (0.018 sec)
+
+Q6
+
+MariaDB [CLASSICMODELS]> SELECT customerName,city,STATE,COUNTRY,CREDITLIMIT
+    -> FROM CUSTOMERS;
++------------------------------------+-------------------+---------------+--------------+-------------+
+| customerName                       | city              | STATE         | COUNTRY      | CREDITLIMIT |
++------------------------------------+-------------------+---------------+--------------+-------------+
+| Atelier graphique                  | Nantes            | NULL          | France       |       21000 |
+| Signal Gift Stores                 | Las Vegas         | NV            | USA          |       71800 |
+| Australian Collectors, Co.         | Melbourne         | Victoria      | Australia    |      117300 |
+| La Rochelle Gifts                  | Nantes            | NULL          | France       |      118200 |
+| Baane Mini Imports                 | Stavern           | NULL          | Norway       |       81700 |
+| Mini Gifts Distributors Ltd.       | San Rafael        | CA            | USA          |      210500 |
+| Havel & Zbyszek Co                 | Warszawa          | NULL          | Poland       |           0 |
+| Blauer See Auto, Co.               | Frankfurt         | NULL          | Germany      |       59700 |
+| Mini Wheels Co.                    | San Francisco     | CA            | USA          |       64600 |
+| Land of Toys Inc.                  | NYC               | NY            | USA          |      114900 |
+| Euro+ Shopping Channel             | Madrid            | NULL          | Spain        |      227600 |
+| Volvo Model Replicas, Co           | Luleå             | NULL          | Sweden       |       53100 |
+| Danish Wholesale Imports           | Kobenhavn         | NULL          | Denmark      |       83400 |
+| Saveley & Henriot, Co.             | Lyon              | NULL          | France       |      123900 |
+| Dragon Souveniers, Ltd.            | Singapore         | NULL          | Singapore    |      103800 |
+| Muscle Machine Inc                 | NYC               | NY            | USA          |      138500 |
+| Diecast Classics Inc.              | Allentown         | PA            | USA          |      100600 |
+| Technics Stores Inc.               | Burlingame        | CA            | USA          |       84600 |
+| Handji Gifts& Co                   | Singapore         | NULL          | Singapore    |       97900 |
+| Herkku Gifts                       | Bergen            | NULL          | Norway       |       96800 |
+| American Souvenirs Inc             | New Haven         | CT            | USA          |           0 |
+| Porto Imports Co.                  | Lisboa            | NULL          | Portugal     |           0 |
+| Daedalus Designs Imports           | Lille             | NULL          | France       |       82900 |
+| La Corne D'abondance, Co.          | Paris             | NULL          | France       |       84300 |
+| Cambridge Collectables Co.         | Cambridge         | MA            | USA          |       43400 |
+| Gift Depot Inc.                    | Bridgewater       | CT            | USA          |       84300 |
+| Osaka Souveniers Co.               | Kita-ku           | Osaka         | Japan        |       81200 |
+| Vitachrome Inc.                    | NYC               | NY            | USA          |       76400 |
+| Toys of Finland, Co.               | Helsinki          | NULL          | Finland      |       96500 |
+| AV Stores, Co.                     | Manchester        | NULL          | UK           |      136800 |
+| Clover Collections, Co.            | Dublin            | NULL          | Ireland      |       69400 |
+| Auto-Moto Classics Inc.            | Brickhaven        | MA            | USA          |       23000 |
+| UK Collectables, Ltd.              | Liverpool         | NULL          | UK           |       92700 |
+| Canadian Gift Exchange Network     | Vancouver         | BC            | Canada       |       90300 |
+| Online Mini Collectables           | Brickhaven        | MA            | USA          |       68700 |
+| Toys4GrownUps.com                  | Pasadena          | CA            | USA          |       90700 |
+| Asian Shopping Network, Co         | Singapore         | NULL          | Singapore    |           0 |
+| Mini Caravy                        | Strasbourg        | NULL          | France       |       53800 |
+| King Kong Collectables, Co.        | Central Hong Kong | NULL          | Hong Kong    |       58600 |
+| Enaco Distributors                 | Barcelona         | NULL          | Spain        |       60300 |
+| Boards & Toys Co.                  | Glendale          | CA            | USA          |       11000 |
+| Natürlich Autos                    | Cunewalde         | NULL          | Germany      |           0 |
+| Heintze Collectables               | Århus             | NULL          | Denmark      |      120800 |
+| Québec Home Shopping Network       | Montréal          | Québec        | Canada       |       48700 |
+| ANG Resellers                      | Madrid            | NULL          | Spain        |           0 |
+| Collectable Mini Designs Co.       | San Diego         | CA            | USA          |      105000 |
+| giftsbymail.co.uk                  | Cowes             | Isle of Wight | UK           |       93900 |
+| Alpha Cognac                       | Toulouse          | NULL          | France       |       61100 |
+| Messner Shopping Network           | Frankfurt         | NULL          | Germany      |           0 |
+| Amica Models & Co.                 | Torino            | NULL          | Italy        |      113000 |
+| Lyon Souveniers                    | Paris             | NULL          | France       |       68100 |
+| Auto Associés & Cie.               | Versailles        | NULL          | France       |       77900 |
+| Toms Spezialitäten, Ltd            | Köln              | NULL          | Germany      |      120400 |
+| Royal Canadian Collectables, Ltd.  | Tsawassen         | BC            | Canada       |       89600 |
+| Franken Gifts, Co                  | München           | NULL          | Germany      |           0 |
+| Anna's Decorations, Ltd            | North Sydney      | NSW           | Australia    |      107800 |
+| Rovelli Gifts                      | Bergamo           | NULL          | Italy        |      119600 |
+| Souveniers And Things Co.          | Chatswood         | NSW           | Australia    |       93300 |
+| Marta's Replicas Co.               | Cambridge         | MA            | USA          |      123700 |
+| BG&E Collectables                  | Fribourg          | NULL          | Switzerland  |           0 |
+| Vida Sport, Ltd                    | Genève            | NULL          | Switzerland  |      141300 |
+| Norway Gifts By Mail, Co.          | Oslo              | NULL          | Norway       |       95100 |
+| Schuyler Imports                   | Amsterdam         | NULL          | Netherlands  |           0 |
+| Der Hund Imports                   | Berlin            | NULL          | Germany      |           0 |
+| Oulu Toy Supplies, Inc.            | Oulu              | NULL          | Finland      |       90500 |
+| Petit Auto                         | Bruxelles         | NULL          | Belgium      |       79900 |
+| Mini Classics                      | White Plains      | NY            | USA          |      102700 |
+| Mini Creations Ltd.                | New Bedford       | MA            | USA          |       94500 |
+| Corporate Gift Ideas Co.           | San Francisco     | CA            | USA          |      105000 |
+| Down Under Souveniers, Inc         | Auckland          | NULL          | New Zealand  |       88000 |
+| Stylish Desk Decors, Co.           | London            | NULL          | UK           |       77000 |
+| Tekni Collectables Inc.            | Newark            | NJ            | USA          |       43000 |
+| Australian Gift Network, Co        | South Brisbane    | Queensland    | Australia    |       51600 |
+| Suominen Souveniers                | Espoo             | NULL          | Finland      |       98800 |
+| Cramer Spezialitäten, Ltd          | Brandenburg       | NULL          | Germany      |           0 |
+| Classic Gift Ideas, Inc            | Philadelphia      | PA            | USA          |       81100 |
+| CAF Imports                        | Madrid            | NULL          | Spain        |       59600 |
+| Men 'R' US Retailers, Ltd.         | Los Angeles       | CA            | USA          |       57700 |
+| Asian Treasures, Inc.              | Cork              | Co. Cork      | Ireland      |           0 |
+| Marseille Mini Autos               | Marseille         | NULL          | France       |       65000 |
+| Reims Collectables                 | Reims             | NULL          | France       |       81100 |
+| SAR Distributors, Co               | Hatfield          | Pretoria      | South Africa |           0 |
+| GiftsForHim.com                    | Auckland          | NULL          | New Zealand  |       77700 |
+| Kommission Auto                    | Münster           | NULL          | Germany      |           0 |
+| Gifts4AllAges.com                  | Boston            | MA            | USA          |       41900 |
+| Online Diecast Creations Co.       | Nashua            | NH            | USA          |      114200 |
+| Lisboa Souveniers, Inc             | Lisboa            | NULL          | Portugal     |           0 |
+| Precious Collectables              | Bern              | NULL          | Switzerland  |           0 |
+| Collectables For Less Inc.         | Brickhaven        | MA            | USA          |       70700 |
+| Royale Belge                       | Charleroi         | NULL          | Belgium      |       23500 |
+| Salzburg Collectables              | Salzburg          | NULL          | Austria      |       71700 |
+| Cruz & Sons Co.                    | Makati City       | NULL          | Philippines  |       81500 |
+| L'ordine Souveniers                | Reggio Emilia     | NULL          | Italy        |      121400 |
+| Tokyo Collectables, Ltd            | Minato-ku         | Tokyo         | Japan        |       94400 |
+| Auto Canal+ Petit                  | Paris             | NULL          | France       |       95000 |
+| Stuttgart Collectable Exchange     | Stuttgart         | NULL          | Germany      |           0 |
+| Extreme Desk Decorations, Ltd      | Wellington        | NULL          | New Zealand  |       86800 |
+| Bavarian Collectables Imports, Co. | Munich            | NULL          | Germany      |       77000 |
+| Classic Legends Inc.               | NYC               | NY            | USA          |       67500 |
+| Feuer Online Stores, Inc           | Leipzig           | NULL          | Germany      |           0 |
+| Gift Ideas Corp.                   | Glendale          | CT            | USA          |       49700 |
+| Scandinavian Gift Ideas            | Bräcke            | NULL          | Sweden       |      116400 |
+| The Sharp Gifts Warehouse          | San Jose          | CA            | USA          |       77600 |
+| Mini Auto Werke                    | Graz              | NULL          | Austria      |       45300 |
+| Super Scale Inc.                   | New Haven         | CT            | USA          |       95400 |
+| Microscale Inc.                    | NYC               | NY            | USA          |       39800 |
+| Corrida Auto Replicas, Ltd         | Madrid            | NULL          | Spain        |      104600 |
+| Warburg Exchange                   | Aachen            | NULL          | Germany      |           0 |
+| FunGiftIdeas.com                   | New Bedford       | MA            | USA          |       85800 |
+| Anton Designs, Ltd.                | Madrid            | NULL          | Spain        |           0 |
+| Australian Collectables, Ltd       | Glen Waverly      | Victoria      | Australia    |       60300 |
+| Frau da Collezione                 | Milan             | NULL          | Italy        |       34800 |
+| West Coast Collectables Co.        | Burbank           | CA            | USA          |       55400 |
+| Mit Vergnügen & Co.                | Mannheim          | NULL          | Germany      |           0 |
+| Kremlin Collectables, Co.          | Saint Petersburg  | NULL          | Russia       |           0 |
+| Raanan Stores, Inc                 | Herzlia           | NULL          | Israel       |           0 |
+| Iberia Gift Imports, Corp.         | Sevilla           | NULL          | Spain        |       65700 |
+| Motor Mint Distributors Inc.       | Philadelphia      | PA            | USA          |       72600 |
+| Signal Collectibles Ltd.           | Brisbane          | CA            | USA          |       60300 |
+| Double Decker Gift Stores, Ltd     | London            | NULL          | UK           |       43300 |
+| Diecast Collectables               | Boston            | MA            | USA          |       85100 |
+| Kelly's Gift Shop                  | Auckland          | NULL          | New Zealand  |      110000 |
++------------------------------------+-------------------+---------------+--------------+-------------+
+122 rows in set (0.001 sec)
+
+Q7
+
+MariaDB [CLASSICMODELS]> SELECT customerName,city,STATE,COUNTRY,CREDITLIMIT
+    -> FROM CUSTOMERS
+    -> WHERE COUNTRY='USA';
++------------------------------+---------------+-------+---------+-------------+
+| customerName                 | city          | STATE | COUNTRY | CREDITLIMIT |
++------------------------------+---------------+-------+---------+-------------+
+| Signal Gift Stores           | Las Vegas     | NV    | USA     |       71800 |
+| Mini Gifts Distributors Ltd. | San Rafael    | CA    | USA     |      210500 |
+| Mini Wheels Co.              | San Francisco | CA    | USA     |       64600 |
+| Land of Toys Inc.            | NYC           | NY    | USA     |      114900 |
+| Muscle Machine Inc           | NYC           | NY    | USA     |      138500 |
+| Diecast Classics Inc.        | Allentown     | PA    | USA     |      100600 |
+| Technics Stores Inc.         | Burlingame    | CA    | USA     |       84600 |
+| American Souvenirs Inc       | New Haven     | CT    | USA     |           0 |
+| Cambridge Collectables Co.   | Cambridge     | MA    | USA     |       43400 |
+| Gift Depot Inc.              | Bridgewater   | CT    | USA     |       84300 |
+| Vitachrome Inc.              | NYC           | NY    | USA     |       76400 |
+| Auto-Moto Classics Inc.      | Brickhaven    | MA    | USA     |       23000 |
+| Online Mini Collectables     | Brickhaven    | MA    | USA     |       68700 |
+| Toys4GrownUps.com            | Pasadena      | CA    | USA     |       90700 |
+| Boards & Toys Co.            | Glendale      | CA    | USA     |       11000 |
+| Collectable Mini Designs Co. | San Diego     | CA    | USA     |      105000 |
+| Marta's Replicas Co.         | Cambridge     | MA    | USA     |      123700 |
+| Mini Classics                | White Plains  | NY    | USA     |      102700 |
+| Mini Creations Ltd.          | New Bedford   | MA    | USA     |       94500 |
+| Corporate Gift Ideas Co.     | San Francisco | CA    | USA     |      105000 |
+| Tekni Collectables Inc.      | Newark        | NJ    | USA     |       43000 |
+| Classic Gift Ideas, Inc      | Philadelphia  | PA    | USA     |       81100 |
+| Men 'R' US Retailers, Ltd.   | Los Angeles   | CA    | USA     |       57700 |
+| Gifts4AllAges.com            | Boston        | MA    | USA     |       41900 |
+| Online Diecast Creations Co. | Nashua        | NH    | USA     |      114200 |
+| Collectables For Less Inc.   | Brickhaven    | MA    | USA     |       70700 |
+| Classic Legends Inc.         | NYC           | NY    | USA     |       67500 |
+| Gift Ideas Corp.             | Glendale      | CT    | USA     |       49700 |
+| The Sharp Gifts Warehouse    | San Jose      | CA    | USA     |       77600 |
+| Super Scale Inc.             | New Haven     | CT    | USA     |       95400 |
+| Microscale Inc.              | NYC           | NY    | USA     |       39800 |
+| FunGiftIdeas.com             | New Bedford   | MA    | USA     |       85800 |
+| West Coast Collectables Co.  | Burbank       | CA    | USA     |       55400 |
+| Motor Mint Distributors Inc. | Philadelphia  | PA    | USA     |       72600 |
+| Signal Collectibles Ltd.     | Brisbane      | CA    | USA     |       60300 |
+| Diecast Collectables         | Boston        | MA    | USA     |       85100 |
++------------------------------+---------------+-------+---------+-------------+
+36 rows in set (0.000 sec)
+
+Q8
+
+MariaDB [CLASSICMODELS]> SELECT officeCode,city,state,country
+    -> FROM offices;
++------------+---------------+------------+-----------+
+| officeCode | city          | state      | country   |
++------------+---------------+------------+-----------+
+| 1          | San Francisco | CA         | USA       |
+| 2          | Boston        | MA         | USA       |
+| 3          | NYC           | NY         | USA       |
+| 4          | Paris         | NULL       | France    |
+| 5          | Tokyo         | Chiyoda-Ku | Japan     |
+| 6          | Sydney        | NULL       | Australia |
+| 7          | London        | NULL       | UK        |
++------------+---------------+------------+-----------+
+7 rows in set (0.009 sec)
+
+
+Q9
+
+MariaDB [CLASSICMODELS]> SELECT officeCode,city,state,country
+    -> FROM offices
+    -> ORDER BY COUNTRY;
++------------+---------------+------------+-----------+
+| officeCode | city          | state      | country   |
++------------+---------------+------------+-----------+
+| 6          | Sydney        | NULL       | Australia |
+| 4          | Paris         | NULL       | France    |
+| 5          | Tokyo         | Chiyoda-Ku | Japan     |
+| 7          | London        | NULL       | UK        |
+| 1          | San Francisco | CA         | USA       |
+| 2          | Boston        | MA         | USA       |
+| 3          | NYC           | NY         | USA       |
++------------+---------------+------------+-----------+
+7 rows in set (0.000 sec)
+
+Q10
+
+MariaDB [CLASSICMODELS]> SELECT PRODUCTCODE,PRODUCTNAME,BUYPRICE
+    -> FROM PRODUCTS;
++-------------+---------------------------------------------+----------+
+| PRODUCTCODE | PRODUCTNAME                                 | BUYPRICE |
++-------------+---------------------------------------------+----------+
+| S10_1678    | 1969 Harley Davidson Ultimate Chopper       |    48.81 |
+| S10_1949    | 1952 Alpine Renault 1300                    |    98.58 |
+| S10_2016    | 1996 Moto Guzzi 1100i                       |    68.99 |
+| S10_4698    | 2003 Harley-Davidson Eagle Drag Bike        |    91.02 |
+| S10_4757    | 1972 Alfa Romeo GTA                         |    85.68 |
+| S10_4962    | 1962 LanciaA Delta 16V                      |   103.42 |
+| S12_1099    | 1968 Ford Mustang                           |    95.34 |
+| S12_1108    | 2001 Ferrari Enzo                           |    95.59 |
+| S12_1666    | 1958 Setra Bus                              |     77.9 |
+| S12_2823    | 2002 Suzuki XREO                            |    66.27 |
+| S12_3148    | 1969 Corvair Monza                          |    89.14 |
+| S12_3380    | 1968 Dodge Charger                          |    75.16 |
+| S12_3891    | 1969 Ford Falcon                            |    83.05 |
+| S12_3990    | 1970 Plymouth Hemi Cuda                     |    31.92 |
+| S12_4473    | 1957 Chevy Pickup                           |     55.7 |
+| S12_4675    | 1969 Dodge Charger                          |    58.73 |
+| S18_1097    | 1940 Ford Pickup Truck                      |    58.33 |
+| S18_1129    | 1993 Mazda RX-7                             |    83.51 |
+| S18_1342    | 1937 Lincoln Berline                        |    60.62 |
+| S18_1367    | 1936 Mercedes-Benz 500K Special Roadster    |    24.26 |
+| S18_1589    | 1965 Aston Martin DB5                       |    65.96 |
+| S18_1662    | 1980s Black Hawk Helicopter                 |    77.27 |
+| S18_1749    | 1917 Grand Touring Sedan                    |     86.7 |
+| S18_1889    | 1948 Porsche 356-A Roadster                 |     53.9 |
+| S18_1984    | 1995 Honda Civic                            |    93.89 |
+| S18_2238    | 1998 Chrysler Plymouth Prowler              |   101.51 |
+| S18_2248    | 1911 Ford Town Car                          |     33.3 |
+| S18_2319    | 1964 Mercedes Tour Bus                      |    74.86 |
+| S18_2325    | 1932 Model A Ford J-Coupe                   |    58.48 |
+| S18_2432    | 1926 Ford Fire Engine                       |    24.92 |
+| S18_2581    | P-51-D Mustang                              |       49 |
+| S18_2625    | 1936 Harley Davidson El Knucklehead         |    24.23 |
+| S18_2795    | 1928 Mercedes-Benz SSK                      |    72.56 |
+| S18_2870    | 1999 Indy 500 Monte Carlo SS                |    56.76 |
+| S18_2949    | 1913 Ford Model T Speedster                 |    60.78 |
+| S18_2957    | 1934 Ford V8 Coupe                          |    34.35 |
+| S18_3029    | 1999 Yamaha Speed Boat                      |    51.61 |
+| S18_3136    | 18th Century Vintage Horse Carriage         |    60.74 |
+| S18_3140    | 1903 Ford Model A                           |     68.3 |
+| S18_3232    | 1992 Ferrari 360 Spider red                 |     77.9 |
+| S18_3233    | 1985 Toyota Supra                           |    57.01 |
+| S18_3259    | Collectable Wooden Train                    |    67.56 |
+| S18_3278    | 1969 Dodge Super Bee                        |    49.05 |
+| S18_3320    | 1917 Maxwell Touring Car                    |    57.54 |
+| S18_3482    | 1976 Ford Gran Torino                       |    73.49 |
+| S18_3685    | 1948 Porsche Type 356 Roadster              |    62.16 |
+| S18_3782    | 1957 Vespa GS150                            |    32.95 |
+| S18_3856    | 1941 Chevrolet Special Deluxe Cabriolet     |    64.58 |
+| S18_4027    | 1970 Triumph Spitfire                       |    91.92 |
+| S18_4409    | 1932 Alfa Romeo 8C2300 Spider Sport         |    43.26 |
+| S18_4522    | 1904 Buick Runabout                         |    52.66 |
+| S18_4600    | 1940s Ford truck                            |    84.76 |
+| S18_4668    | 1939 Cadillac Limousine                     |    23.14 |
+| S18_4721    | 1957 Corvette Convertible                   |    69.93 |
+| S18_4933    | 1957 Ford Thunderbird                       |    34.21 |
+| S24_1046    | 1970 Chevy Chevelle SS 454                  |    49.24 |
+| S24_1444    | 1970 Dodge Coronet                          |    32.37 |
+| S24_1578    | 1997 BMW R 1100 S                           |    60.86 |
+| S24_1628    | 1966 Shelby Cobra 427 S/C                   |    29.18 |
+| S24_1785    | 1928 British Royal Navy Airplane            |    66.74 |
+| S24_1937    | 1939 Chevrolet Deluxe Coupe                 |    22.57 |
+| S24_2000    | 1960 BSA Gold Star DBD34                    |    37.32 |
+| S24_2011    | 18th century schooner                       |    82.34 |
+| S24_2022    | 1938 Cadillac V-16 Presidential Limousine   |    20.61 |
+| S24_2300    | 1962 Volkswagen Microbus                    |    61.34 |
+| S24_2360    | 1982 Ducati 900 Monster                     |     47.1 |
+| S24_2766    | 1949 Jaguar XK 120                          |    47.25 |
+| S24_2840    | 1958 Chevy Corvette Limited Edition         |    15.91 |
+| S24_2841    | 1900s Vintage Bi-Plane                      |    34.25 |
+| S24_2887    | 1952 Citroen-15CV                           |    72.82 |
+| S24_2972    | 1982 Lamborghini Diablo                     |    16.24 |
+| S24_3151    | 1912 Ford Model T Delivery Wagon            |    46.91 |
+| S24_3191    | 1969 Chevrolet Camaro Z28                   |    50.51 |
+| S24_3371    | 1971 Alpine Renault 1600s                   |    38.58 |
+| S24_3420    | 1937 Horch 930V Limousine                   |     26.3 |
+| S24_3432    | 2002 Chevy Corvette                         |    62.11 |
+| S24_3816    | 1940 Ford Delivery Sedan                    |    48.64 |
+| S24_3856    | 1956 Porsche 356A Coupe                     |     98.3 |
+| S24_3949    | Corsair F4U ( Bird Cage)                    |    29.34 |
+| S24_3969    | 1936 Mercedes Benz 500k Roadster            |    21.75 |
+| S24_4048    | 1992 Porsche Cayenne Turbo Silver           |    69.78 |
+| S24_4258    | 1936 Chrysler Airflow                       |    57.46 |
+| S24_4278    | 1900s Vintage Tri-Plane                     |    36.23 |
+| S24_4620    | 1961 Chevrolet Impala                       |    32.33 |
+| S32_1268    | 1980?s GM Manhattan Express                 |    53.93 |
+| S32_1374    | 1997 BMW F650 ST                            |    66.92 |
+| S32_2206    | 1982 Ducati 996 R                           |    24.14 |
+| S32_2509    | 1954 Greyhound Scenicruiser                 |    25.98 |
+| S32_3207    | 1950's Chicago Surface Lines Streetcar      |    26.72 |
+| S32_3522    | 1996 Peterbilt 379 Stake Bed with Outrigger |    33.61 |
+| S32_4289    | 1928 Ford Phaeton Deluxe                    |    33.02 |
+| S32_4485    | 1974 Ducati 350 Mk3 Desmo                   |    56.13 |
+| S50_1341    | 1930 Buick Marquette Phaeton                |    27.06 |
+| S50_1392    | Diamond T620 Semi-Skirted Tanker            |    68.29 |
+| S50_1514    | 1962 City of Detroit Streetcar              |    37.49 |
+| S50_4713    | 2002 Yamaha YZR M1                          |    34.17 |
+| S700_1138   | The Schooner Bluenose                       |       34 |
+| S700_1691   | American Airlines: B767-300                 |    51.15 |
+| S700_1938   | The Mayflower                               |     43.3 |
+| S700_2047   | HMS Bounty                                  |    39.83 |
+| S700_2466   | America West Airlines B757-200              |     68.8 |
+| S700_2610   | The USS Constitution Ship                   |    33.97 |
+| S700_2824   | 1982 Camaro Z28                             |    46.53 |
+| S700_2834   | ATA: B757-300                               |    59.33 |
+| S700_3167   | F/A 18 Hornet 1/72                          |     54.4 |
+| S700_3505   | The Titanic                                 |    51.09 |
+| S700_3962   | The Queen Mary                              |    53.63 |
+| S700_4002   | American Airlines: MD-11S                   |    36.27 |
+| S72_1253    | Boeing X-32A JSF                            |    32.77 |
+| S72_3212    | Pont Yacht                                  |     33.3 |
++-------------+---------------------------------------------+----------+
+110 rows in set (0.001 sec)
+
+Q11
+
+MariaDB [CLASSICMODELS]> SELECT AVG(BUYPRICE) FROM PRODUCTS;
++--------------------+
+| AVG(BUYPRICE)      |
++--------------------+
+| 54.395181818181825 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [CLASSICMODELS]> SELECT AVG(BUYPRICE) AS MEDIA FROM PRODUCTS;
++--------------------+
+| MEDIA              |
++--------------------+
+| 54.395181818181825 |
++--------------------+
+1 row in set (0.000 sec)
+
+Q12
+
+MariaDB [CLASSICMODELS]> SELECT PRODUCTNAME
+    -> FROM PRODUCTS
+    -> WHERE BUYPRICE>100;
++--------------------------------+
+| PRODUCTNAME                    |
++--------------------------------+
+| 1962 LanciaA Delta 16V         |
+| 1998 Chrysler Plymouth Prowler |
++--------------------------------+
+2 rows in set (0.001 sec)
+
+Q13
+
+MariaDB [CLASSICMODELS]> UPDATE PRODUCTS
+    -> SET PRODUCTNAME = '1969 Ford Falcon Banco de Dados'
+    -> WHERE PRODUCTCODE = 'S12_3891';
+Query OK, 1 row affected (0.010 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Q14
+
+MariaDB [CLASSICMODELS]> SELECT PRODUCTCODE,PRODUCTNAME
+    -> FROM PRODUCTS
+    -> WHERE PRODUCTCODE = 'S12_3891';
++-------------+---------------------------------+
+| PRODUCTCODE | PRODUCTNAME                     |
++-------------+---------------------------------+
+| S12_3891    | 1969 Ford Falcon Banco de Dados |
++-------------+---------------------------------+
+1 row in set (0.000 sec)
+
+Q15
+
+MariaDB [CLASSICMODELS]> SELECT employeeNumber,lastName,firstName
+    -> FROM EMPLOYEES
+    -> WHERE LASTNAME LIKE 'B%';
++----------------+----------+-----------+
+| employeeNumber | lastName | firstName |
++----------------+----------+-----------+
+|           1102 | Bondur   | Gerard    |
+|           1143 | Bow      | Anthony   |
+|           1337 | Bondur   | Loui      |
+|           1501 | Bott     | Larry     |
++----------------+----------+-----------+
+4 rows in set (0.010 sec)
